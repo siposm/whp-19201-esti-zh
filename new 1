@@ -1,0 +1,28 @@
+számonkérendő tananyagok:
+- xml beolvasás
+- 4-5 db linq
+- reflexió (validátor)
+- dll
+
+dll + xml + 3 db linq = elégséges szint
+
+-------
+
+Feladat1: email validátor
+- legyen valamilyen vizsgáló karakter (pl @) a string-ben + hossz
+- ezt attrib-ként kell megadni és ezt vizsgáljuk utána dinamikusan
+
+Feladat2: dll létrehozása
+osztály amely beolvas egy adott string input-ot (ami xml)
+és egy list-et ad vissza, adott entitásokkal
+
+Feladat3: lekérdezések
+használjuk a dll-t, adjuk meg a bemenetet (teszt.xml)
+kérdezzük le [...]
+
+Feladat4: reflexió
+vizsgáljuk meg reflexió segítségével, hogy ...
+
+======================
+
+dll >> xdocument > list string
