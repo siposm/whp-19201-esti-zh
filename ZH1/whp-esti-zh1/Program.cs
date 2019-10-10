@@ -20,8 +20,26 @@ namespace whp_esti_zh1
             d.DetectWorkerClasses();
 
             // FELADAT 2. (xml to object)
-            XMLReader reader = new XMLReader();
-            IEnumerable<Worker> w = reader.ReadXML("workers.xml");
+            Func<string, IEnumerable<Worker>> xmlReader = (x =>
+            {
+                XDocument xdoc = XDocument.Load(x);
+                List<Worker> list = new List<Worker>();
+
+                foreach (var item in xdoc.Root.Descendants("person"))
+                    list.Add(new Worker()
+                    {
+                        Name = item.Element("name").Value,
+                        Email = item.Element("email").Value,
+                        Dept = item.Element("dept").Value,
+                        Phone = item.Element("phone").Value,
+                        Rank = item.Element("rank").Value,
+                        Room = item.Element("room").Value
+                    });
+
+                return list;
+            });
+
+            IEnumerable<Worker> w = xmlReader("workers.xml");
 
             // FELADAT 3. (attribute + reflection)
             ConsoleLogger cl = new ConsoleLogger();
@@ -36,20 +54,35 @@ namespace whp_esti_zh1
                           where x.Element("name").Value.ToUpper().Contains("TAMÁS")
                           select x;
 
-            // 4.2. egyes intézetekben hányan dolgoznak
+            // 4.2. egyes intézetekben hányan dolgoznak, dbszám alapján csökkenőbe rendezve
             var f2 = from x in doc.Descendants("person")
                      group x by x.Element("dept").Value into g
                      orderby g.Count() descending
-                     orderby g.Key
                      select new
                      {
                          DEPT = g.Key,
                          COUNT = g.Count()
                      };
-            ;
-            // 4.3.
 
-            // 4.4.
+            // 4.3. dolgozók nevei és emailjei akik a "BA" épület 3. szinten dolgoznak
+            var f3 = from x in doc.Descendants("person")
+                     where x.Element("room").Value != ""
+                        && x.Element("room").Value.Contains("BA.3")
+                     select new
+                     {
+                         NAME = x.Element("name").Value,
+                         MAIL = x.Element("email").Value
+                     };
+
+            // 4.4. átlagosan mennyi a kereset intézetenként
+            var f4 = from x in doc.Descendants("person")
+                     group x by x.Element("dept").Value into g
+                     select new
+                     {
+                         AVGSAL = g.Average(a => int.Parse(a.Element("sal").Value)),
+                         DEPT = g.Key
+                     };
+            
         }
     }
 }

@@ -33,29 +33,6 @@ namespace whp_esti_zh1
         }
     }
 
-    
-    class XMLReader
-    {
-        public IEnumerable<Worker> ReadXML(string filename)
-        {
-            XDocument xdoc = XDocument.Load(filename);
-            List<Worker> list = new List<Worker>();
-
-            foreach (var item in xdoc.Root.Descendants("person"))
-                list.Add(new Worker()
-                {
-                    Name = item.Element("name").Value,
-                    Email = item.Element("email").Value,
-                    Dept = item.Element("dept").Value,
-                    Phone = item.Element("phone").Value,
-                    Rank = item.Element("rank").Value,
-                    Room = item.Element("room").Value
-                });
-
-            return list;
-        }
-    }
-
 
     [AttributeUsage(AttributeTargets.Property)]
     class EmailValidatorAttribute : Attribute
