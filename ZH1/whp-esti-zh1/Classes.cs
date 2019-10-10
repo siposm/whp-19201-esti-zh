@@ -8,6 +8,8 @@ using System.Xml.Linq;
 
 namespace whp_esti_zh1
 {
+    // reflexió
+    // xml írás
     class Detector
     {
         public void DetectWorkerClasses()
@@ -19,7 +21,8 @@ namespace whp_esti_zh1
                 .ToArray();
 
             XDocument xdoc = new XDocument();
-            xdoc.Add(new XElement("workers", new XAttribute("count", types.Length)));
+            xdoc.Add(new XElement("workers",
+                new XAttribute("count", types.Length)));
 
             foreach (var item in types)
                 xdoc.Root.Add(new XElement("class",
@@ -30,45 +33,15 @@ namespace whp_esti_zh1
         }
     }
 
-    class FirstFloorWorker : Worker
-    {
-
-    }
-
-    class SecondFloorWorker : Worker
-    {
-
-    }
-
-    class ThirdFloorWorker : Worker
-    {
-
-    }
-
     
-
     class XMLReader
     {
-        public IEnumerable<string> ReadXML(XDocument xdoc)
-        {
-            List<string> x = new List<string>();
-            foreach (var item in xdoc.Root.Descendants("person"))
-                x.Add(item.Element("name").Value);
-            return x;
-        }
-
-        public XDocument ReadXMLToXDoc(string filename)
-        {
-            return XDocument.Load(filename);
-        }
-
         public IEnumerable<Worker> ReadXML(string filename)
         {
             XDocument xdoc = XDocument.Load(filename);
             List<Worker> list = new List<Worker>();
 
             foreach (var item in xdoc.Root.Descendants("person"))
-            {
                 list.Add(new Worker()
                 {
                     Name = item.Element("name").Value,
@@ -78,7 +51,6 @@ namespace whp_esti_zh1
                     Rank = item.Element("rank").Value,
                     Room = item.Element("room").Value
                 });
-            }
 
             return list;
         }
@@ -137,4 +109,10 @@ namespace whp_esti_zh1
             return this.Name + " [" + this.Email + "]";
         }
     }
+
+    class FirstFloorWorker : Worker { }
+
+    class SecondFloorWorker : Worker { }
+
+    class ThirdFloorWorker : Worker { }
 }
