@@ -28,12 +28,7 @@ namespace whp_esti_zh1
                 foreach (var item in xdoc.Root.Descendants("person"))
                     list.Add(new Worker()
                     {
-                        Name = item.Element("name").Value,
-                        Email = item.Element("email").Value,
-                        Dept = item.Element("dept").Value,
-                        Phone = item.Element("phone").Value,
-                        Rank = item.Element("rank").Value,
-                        Room = item.Element("room").Value
+                        Email = item.Element("email").Value
                     });
 
                 return list;
