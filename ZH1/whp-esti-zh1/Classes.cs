@@ -8,8 +8,6 @@ using System.Xml.Linq;
 
 namespace whp_esti_zh1
 {
-    // reflexió
-    // xml írás
     class Detector
     {
         public void DetectWorkerClasses()
@@ -49,13 +47,16 @@ namespace whp_esti_zh1
             if (obj.GetType().GetProperty("Email") != null)
             {
                 PropertyInfo prop = obj.GetType().GetProperty("Email");
-                foreach (Attribute att in prop.GetCustomAttributes())
-                {
-                    EmailValidatorAttribute eva = (EmailValidatorAttribute)att;
-                    if ((obj as Worker).Email.Contains(eva.Character))
-                        if ((obj as Worker).Email.Length > eva.Length)
-                            return true;
-                }
+
+                EmailValidatorAttribute eva = (EmailValidatorAttribute)prop.GetCustomAttribute(typeof(EmailValidatorAttribute));
+
+                if (obj.GetType().GetProperty("Email").GetValue(obj).ToString().Contains(eva.Character))
+                    if (obj.GetType().GetProperty("Email").GetValue(obj).ToString().Length > eva.Length)
+                        return true;
+
+                //if ((obj as Worker).Email.Contains(eva.Character))
+                //    if ((obj as Worker).Email.Length > eva.Length)
+                //        return true;
             }
             return false;
         }
