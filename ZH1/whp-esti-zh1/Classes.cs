@@ -8,19 +8,23 @@ using System.Xml.Linq;
 
 namespace whp_esti_zh1
 {
-    class Detector // To DLL
+    class Detector
     {
-        public void Detect<T>(IEnumerable<T> collection)
+        public void DetectWorkerClasses()
         {
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes().Where( x => x.Name.Contains("Worker") ).ToArray();
+            Type[] types = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(x => x.GetInterface("IWorker") != null)
+                .OrderByDescending( x => x.FullName )
+                .ToArray();
 
             XDocument xdoc = new XDocument();
-            xdoc.Add(new XElement("workersRoot"));
+            xdoc.Add(new XElement("workers", new XAttribute("count", types.Length)));
 
             foreach (var item in types)
-            {
-                xdoc.Root.Add(new XElement("workerClass" , item.Name));
-            }
+                xdoc.Root.Add(new XElement("class",
+                        new XElement("name", item.Name),
+                        new XElement("hash", item.Name.GetHashCode())));
 
             xdoc.Save("workerClasses.xml");
         }
@@ -40,6 +44,8 @@ namespace whp_esti_zh1
     {
 
     }
+
+    
 
     class XMLReader
     {
@@ -91,25 +97,31 @@ namespace whp_esti_zh1
     {
         public bool CheckEmail(object obj)
         {
-            foreach (PropertyInfo prop in obj.GetType().GetProperties())
+            if (obj.GetType().GetProperty("Email") != null)
             {
+                PropertyInfo prop = obj.GetType().GetProperty("Email");
                 foreach (Attribute att in prop.GetCustomAttributes())
                 {
                     EmailValidatorAttribute eva = (EmailValidatorAttribute)att;
-                    if ( (obj as Worker).Email.Contains(eva.Character) )
-                    {
-                        if ( (obj as Worker).Email.Length > eva.Length )
-                        {
+                    if ((obj as Worker).Email.Contains(eva.Character))
+                        if ((obj as Worker).Email.Length > eva.Length)
                             return true;
-                        }
-                    }
                 }
             }
             return false;
         }
     }
 
-    class Worker
+    interface IWorker
+    {
+        string Name { get; set; }
+        string Dept { get; set; }
+        string Rank { get; set; }
+        string Phone { get; set; }
+        string Room { get; set; }
+    }
+
+    class Worker : IWorker
     {
         public string Name { get; set; }
         public string Dept { get; set; }
@@ -119,5 +131,10 @@ namespace whp_esti_zh1
 
         [EmailValidator(Character = '@', Length = 5)]
         public string Email { get; set; }
+
+        public override string ToString()
+        {
+            return this.Name + " [" + this.Email + "]";
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//using XMLReaderLibrary;
+using ConsoleLoggerLibrary;
 
 namespace whp_esti_zh1
 {
@@ -12,13 +12,13 @@ namespace whp_esti_zh1
     {
         static void Main(string[] args)
         {
-            Worker s1 = new Worker() { Name = "Worker 1", Email = "wor@ker.com" };
-            Worker s2 = new Worker() { Name = "Worker 2", Email = "wor" };
+            //Worker s1 = new Worker() { Name = "Worker 1", Email = "wor@ker.com" };
+            //Worker s2 = new Worker() { Name = "Worker 2", Email = "wor" };
 
-            Validator v = new Validator();
+            //Validator v = new Validator();
 
-            Console.WriteLine(v.CheckEmail(s1));
-            Console.WriteLine(v.CheckEmail(s2));
+            //Console.WriteLine(v.CheckEmail(s1));
+            //Console.WriteLine(v.CheckEmail(s2));
 
             // ==================================================================
 
@@ -27,7 +27,17 @@ namespace whp_esti_zh1
 
 
             Detector d = new Detector();
-            d.Detect(w);
+            d.DetectWorkerClasses();
+
+            ConsoleLogger cl = new ConsoleLogger();
+            Validator v = new Validator();
+
+            foreach (var item in w)
+            {
+                //cl.ConsoleLog(item);
+                cl.ConsoleLog(v.CheckEmail(item));
+            }
+
         }
     }
 }
