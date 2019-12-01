@@ -1,0 +1,17 @@
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\NUnit3.TestAdapter.dll
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\NUnit3.TestAdapter.pdb
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\nunit.engine.dll
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\nunit.engine.api.dll
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\GroceryShopTests.dll
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\GroceryShopTests.pdb
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\nunit.framework.dll
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\zh2.exe
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\zh2.pdb
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\zh2.exe.config
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\nunit.framework.pdb
+C:\Users\sm\Desktop\zh2\GroceryShopTests\bin\Debug\nunit.framework.xml
+C:\Users\sm\Desktop\zh2\GroceryShopTests\obj\Debug\GroceryShopTests.csprojAssemblyReference.cache
+C:\Users\sm\Desktop\zh2\GroceryShopTests\obj\Debug\GroceryShopTests.csproj.CoreCompileInputs.cache
+C:\Users\sm\Desktop\zh2\GroceryShopTests\obj\Debug\GroceryShopTests.csproj.CopyComplete
+C:\Users\sm\Desktop\zh2\GroceryShopTests\obj\Debug\GroceryShopTests.dll
+C:\Users\sm\Desktop\zh2\GroceryShopTests\obj\Debug\GroceryShopTests.pdb

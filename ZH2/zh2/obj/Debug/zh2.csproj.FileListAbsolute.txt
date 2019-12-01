@@ -1,0 +1,7 @@
+C:\Users\sm\Desktop\zh2\zh2\bin\Debug\zh2.exe.config
+C:\Users\sm\Desktop\zh2\zh2\bin\Debug\zh2.exe
+C:\Users\sm\Desktop\zh2\zh2\bin\Debug\zh2.pdb
+C:\Users\sm\Desktop\zh2\zh2\obj\Debug\zh2.csprojAssemblyReference.cache
+C:\Users\sm\Desktop\zh2\zh2\obj\Debug\zh2.csproj.CoreCompileInputs.cache
+C:\Users\sm\Desktop\zh2\zh2\obj\Debug\zh2.exe
+C:\Users\sm\Desktop\zh2\zh2\obj\Debug\zh2.pdb
