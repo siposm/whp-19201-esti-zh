@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace zh2
 {
@@ -53,46 +54,61 @@ namespace zh2
             return Math.Round((double)(sum - (sum * (discountValue / 100))), 3);
         }
 
-        public void PlaceOrder()
+        public void PlaceOrderTXT()
         {
             Task t1 = new Task(() =>
             {
-                Console.WriteLine("t1 working...");
+                Console.WriteLine("\t> t1 working...");
                 Thread.Sleep(2000); // 2 msp
 
                 // write to file
-                StreamWriter sw = new StreamWriter("names.txt");
+                XDocument x = new XDocument();
+                x.Add(new XElement("names_root"));
                 foreach (var item in ShoppingCart)
-                    sw.WriteLine(item.Name);
-                sw.Close();
+                    x.Root.Add(new XElement("name", item.Name));
+                x.Save("names.xml");
+                //StreamWriter sw = new StreamWriter("names.txt");
+                //foreach (var item in ShoppingCart)
+                //    sw.WriteLine(item.Name);
+                //sw.Close();
 
                 Console.WriteLine("t1 finished");
             });
 
             Task t2 = new Task(() =>
             {
-                Console.WriteLine("t2 working...");
-                Thread.Sleep(5000); // 5 msp
+                Console.WriteLine("\t> t2 working...");
+                Thread.Sleep(10000); // 10 msp
 
                 // write to file
-                StreamWriter sw = new StreamWriter("prices.txt");
+                XDocument x = new XDocument();
+                x.Add(new XElement("prices_root"));
                 foreach (var item in ShoppingCart)
-                    sw.WriteLine(item.Price);
-                sw.Close();
+                    x.Root.Add(new XElement("price", item.Price));
+                x.Save("prices.xml");
+                //StreamWriter sw = new StreamWriter("prices.txt");
+                //foreach (var item in ShoppingCart)
+                //    sw.WriteLine(item.Price);
+                //sw.Close();
 
                 Console.WriteLine("t2 finished");
             });
 
             Task t3 = new Task(() =>
             {
-                Console.WriteLine("t3 working...");
-                Thread.Sleep(10000); // 10 msp
+                Console.WriteLine("\t> t3 working...");
+                Thread.Sleep(5000); // 5 msp
 
                 // write to file
-                StreamWriter sw = new StreamWriter("quantities.txt");
+                XDocument x = new XDocument();
+                x.Add(new XElement("quantities_root"));
                 foreach (var item in ShoppingCart)
-                    sw.WriteLine(item.Qty);
-                sw.Close();
+                    x.Root.Add(new XElement("quantity", item.Qty));
+                x.Save("qties.xml");
+                //StreamWriter sw = new StreamWriter("quantities.txt");
+                //foreach (var item in ShoppingCart)
+                //    sw.WriteLine(item.Qty);
+                //sw.Close();
 
                 Console.WriteLine("t3 finished");
             });
@@ -103,9 +119,29 @@ namespace zh2
 
             Task.WhenAll(t1, t2, t3).ContinueWith(x =>
             {
-                Console.WriteLine("\n\n----------\nTASKS FINISHED");
+                Console.WriteLine("\n\n----------\n>>> ALL TASKS FINISHED");
+
+            }).ContinueWith( x =>
+            {
+                int avgTemp = 0;
+                var doc = XDocument.Load("http://users.nik.uni-obuda.hu/siposm/db/weatherdata_v2_1.xml");
+
+                foreach (var item in doc.Descendants("temperature"))
+                    avgTemp += int.Parse(item.Value);
+
+                Console.WriteLine("\n\tAVG TEMP: " + avgTemp/ doc.Descendants("temperature").Count());
 
             }).Wait();
+        }
+
+        
+        private void WriteToFile<T>(IEnumerable<T> coll, string elementType, string saveAs)
+        {
+            XDocument x = new XDocument();
+            x.Add(new XElement("root"));
+            foreach (var item in coll)
+                x.Root.Add(new XElement(elementType));
+            x.Save(saveAs);
         }
     }
 
@@ -125,7 +161,7 @@ namespace zh2
             gs.AddToCart(new Food() { Name = "food-3", Price = 20300, Qty = 1 });
             gs.AddToCart(new Food() { Name = "food-4", Price = 450, Qty = 2 });
 
-            gs.PlaceOrder();
+            gs.PlaceOrderTXT();
         }
     }
 }

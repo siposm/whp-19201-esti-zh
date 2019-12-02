@@ -5,3 +5,10 @@ C:\Users\sm\Desktop\zh2\zh2\obj\Debug\zh2.csprojAssemblyReference.cache
 C:\Users\sm\Desktop\zh2\zh2\obj\Debug\zh2.csproj.CoreCompileInputs.cache
 C:\Users\sm\Desktop\zh2\zh2\obj\Debug\zh2.exe
 C:\Users\sm\Desktop\zh2\zh2\obj\Debug\zh2.pdb
+d:\CODES\whp-esti-zh1\ZH2\zh2\bin\Debug\zh2.exe.config
+d:\CODES\whp-esti-zh1\ZH2\zh2\bin\Debug\zh2.exe
+d:\CODES\whp-esti-zh1\ZH2\zh2\bin\Debug\zh2.pdb
+d:\CODES\whp-esti-zh1\ZH2\zh2\obj\Debug\zh2.csprojAssemblyReference.cache
+d:\CODES\whp-esti-zh1\ZH2\zh2\obj\Debug\zh2.csproj.CoreCompileInputs.cache
+d:\CODES\whp-esti-zh1\ZH2\zh2\obj\Debug\zh2.exe
+d:\CODES\whp-esti-zh1\ZH2\zh2\obj\Debug\zh2.pdb
