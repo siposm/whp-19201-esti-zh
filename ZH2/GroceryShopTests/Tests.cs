@@ -33,10 +33,10 @@ namespace GroceryShopTests
         {
             // arrange => setup
 
-            // assert
+            // act
             gs.AddToCart(new Food() { Name = "Watermelon", Price = 770 });
 
-            // act
+            // assert
             Assert.That(gs.ShoppingCart[gs.ShoppingCart.Count-1].Name, Is.EqualTo("Watermelon"));
             Assert.That(gs.ShoppingCart[gs.ShoppingCart.Count-1].Price, Is.EqualTo(770));
         }
